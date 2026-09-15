@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Code2,
   Box,
-  Layers,
   Cpu,
   Chrome,
   CheckCircle2,
@@ -15,7 +14,6 @@ import {
 import {
   slugify,
   analyzeText,
-  fastHash,
   createDefaultWorkspace,
   CORE_VERSION
 } from '@project/core';
@@ -222,3 +220,4 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
+

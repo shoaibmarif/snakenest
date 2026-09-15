@@ -51,3 +51,4 @@ export function truncate(text: string, maxLength: number, suffix = '...'): strin
   const lastSpace = sub.lastIndexOf(' ');
   return (lastSpace > 0 ? sub.slice(0, lastSpace) : sub) + suffix;
 }
+

@@ -4,4 +4,55 @@
   html {
     color-scheme: dark;
   }
+
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
+  html:not(.dark) body {
+    background-color: #f8fafc;
+    color: #0f172a;
+  }
+
+  html:not(.dark) header {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #e2e8f0;
+  }
+
+  html:not(.dark) header span,
+  html:not(.dark) h1,
+  html:not(.dark) h2,
+  html:not(.dark) h3 {
+    color: #0f172a;
+  }
+
+  html:not(.dark) .bg-slate-900,
+  html:not(.dark) .bg-slate-900\/40,
+  html:not(.dark) .bg-slate-900\/60,
+  html:not(.dark) .bg-slate-900\/80,
+  html:not(.dark) .bg-slate-900\/90 {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+  }
+
+  html:not(.dark) .bg-slate-950,
+  html:not(.dark) .bg-slate-950\/40,
+  html:not(.dark) .bg-slate-950\/50,
+  html:not(.dark) .bg-slate-950\/60,
+  html:not(.dark) .bg-slate-950\/80,
+  html:not(.dark) .bg-slate-950\/85 {
+    background-color: #f1f5f9;
+    border-color: #e2e8f0;
+  }
+
+  html:not(.dark) .border-slate-800,
+  html:not(.dark) .border-slate-800\/60,
+  html:not(.dark) .border-slate-800\/80 {
+    border-color: #cbd5e1;
+  }
+
+  html:not(.dark) footer {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+  }
 }

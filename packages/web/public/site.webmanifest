@@ -1,11 +1,11 @@
 {
-  "name": "Modern Monorepo Web Application",
-  "short_name": "ProjectWeb",
-  "description": "Production-ready modular TypeScript web application built with React 19 and Tailwind CSS v4",
+  "name": "Snake Game Online – Play Classic Snake Game Free",
+  "short_name": "SnakeGame",
+  "description": "Play classic retro Snake Game online for free with multiple modes, difficulty levels, high scores, and mobile touch support.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#090d16",
-  "theme_color": "#3b82f6",
+  "theme_color": "#10b981",
   "icons": [
     {
       "src": "/favicon.svg",

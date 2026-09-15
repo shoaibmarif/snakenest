@@ -32,3 +32,4 @@ export interface TextMetrics {
   readingTimeMinutes: number;
   hash: string;
 }
+
