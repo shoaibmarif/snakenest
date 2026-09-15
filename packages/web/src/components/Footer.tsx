@@ -19,13 +19,21 @@ export const Footer: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="/sitemap.xml"
+            target="_blank"
+            rel="noreferrer"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            Sitemap
+          </a>
+          <a
+            href="https://github.com/shoaibmarif/snakenest"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
           >
             <Github className="h-3.5 w-3.5" />
-            <span>Open Source</span>
+            <span>Repository</span>
           </a>
         </div>
       </div>

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://example.com/sitemap.xml
-
+# Sitemap Location
+Sitemap: https://snakenest.netlify.app/sitemap.xml

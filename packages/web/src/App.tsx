@@ -128,10 +128,14 @@ export const App: React.FC = () => {
         </section>
 
         {/* Local Leaderboard & High Score Panel */}
-        <HighScorePanel statistics={statistics} />
+        <section id="leaderboard">
+          <HighScorePanel statistics={statistics} />
+        </section>
 
         {/* Comprehensive SEO Content & FAQ */}
-        <Instructions />
+        <section id="how-to-play">
+          <Instructions />
+        </section>
       </main>
 
       {/* Settings Modal */}

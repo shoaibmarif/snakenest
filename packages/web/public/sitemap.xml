@@ -1,10 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage & Core Arcade Experience -->
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://snakenest.netlify.app/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://snakenest.netlify.app/og-snake-game.png</image:loc>
+      <image:title>Snake Game Online – Classic Retro Arcade</image:title>
+      <image:caption>Play classic Snake Game online for free. Enjoy retro arcade gameplay with 4 modes, 4 difficulty levels, high scores, keyboard controls, and touch D-pad support.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Classic Mode Entrypoint -->
+  <url>
+    <loc>https://snakenest.netlify.app/#classic</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Endless Mode Entrypoint -->
+  <url>
+    <loc>https://snakenest.netlify.app/#endless</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Time Challenge Mode Entrypoint -->
+  <url>
+    <loc>https://snakenest.netlify.app/#time-challenge</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Obstacles Mode Entrypoint -->
+  <url>
+    <loc>https://snakenest.netlify.app/#obstacles</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Rules, Controls & FAQ Guide -->
+  <url>
+    <loc>https://snakenest.netlify.app/#how-to-play</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Leaderboards & Lifetime Statistics -->
+  <url>
+    <loc>https://snakenest.netlify.app/#leaderboard</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
-
