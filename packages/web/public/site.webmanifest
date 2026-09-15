@@ -1,0 +1,16 @@
+{
+  "name": "Modern Monorepo Web Application",
+  "short_name": "ProjectWeb",
+  "description": "Production-ready modular TypeScript web application built with React 19 and Tailwind CSS v4",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

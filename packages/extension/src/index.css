@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    color-scheme: dark;
+    width: 360px;
+    height: 480px;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "project-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web",
+    "dev:web": "npm run dev --workspace=@project/web",
+    "dev:ext": "npm run dev --workspace=@project/extension",
+    "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build --workspace=@project/web",
+    "build:ext": "npm run build --workspace=@project/extension",
+    "test": "vitest run packages/core"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}
