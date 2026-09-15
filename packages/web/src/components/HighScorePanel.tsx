@@ -4,26 +4,35 @@ import { Trophy, Apple, Gamepad2, Ruler, ShieldAlert, Infinity, Timer, Boxes } f
 
 interface HighScorePanelProps {
   statistics: GameStatistics;
+  theme?: 'dark' | 'light';
 }
 
-export const HighScorePanel: React.FC<HighScorePanelProps> = ({ statistics }) => {
+export const HighScorePanel: React.FC<HighScorePanelProps> = ({ statistics, theme = 'dark' }) => {
+  const isDark = theme === 'dark';
+
   const modeScores = [
-    { label: 'Classic', score: statistics.bestScores.classic || 0, icon: ShieldAlert, color: 'text-emerald-400' },
-    { label: 'Endless', score: statistics.bestScores.endless || 0, icon: Infinity, color: 'text-blue-400' },
-    { label: 'Time Challenge', score: statistics.bestScores['time-challenge'] || 0, icon: Timer, color: 'text-rose-400' },
-    { label: 'Obstacles', score: statistics.bestScores.obstacles || 0, icon: Boxes, color: 'text-amber-400' }
+    { label: 'Classic', score: statistics.bestScores.classic || 0, icon: ShieldAlert, color: isDark ? 'text-emerald-400' : 'text-emerald-600' },
+    { label: 'Endless', score: statistics.bestScores.endless || 0, icon: Infinity, color: isDark ? 'text-blue-400' : 'text-blue-600' },
+    { label: 'Time Challenge', score: statistics.bestScores['time-challenge'] || 0, icon: Timer, color: isDark ? 'text-rose-400' : 'text-rose-600' },
+    { label: 'Obstacles', score: statistics.bestScores.obstacles || 0, icon: Boxes, color: isDark ? 'text-amber-400' : 'text-amber-600' }
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm space-y-6">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+    <div className={`w-full max-w-4xl mx-auto rounded-2xl border p-6 backdrop-blur-sm space-y-6 transition-colors ${
+      isDark ? 'border-slate-800 bg-slate-900/60' : 'border-slate-200 bg-white shadow-sm'
+    }`}>
+      <div className={`flex items-center justify-between border-b pb-4 ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
         <div className="flex items-center gap-2.5">
-          <div className="rounded-xl bg-amber-500/10 p-2 text-amber-400 border border-amber-500/20">
+          <div className={`rounded-xl p-2 border ${
+            isDark ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-amber-50 text-amber-600 border-amber-200'
+          }`}>
             <Trophy className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white">Leaderboard & Lifetime Records</h2>
-            <p className="text-xs text-slate-400">Stored locally in your browser</p>
+            <h2 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              Leaderboard & Lifetime Records
+            </h2>
+            <p className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Stored locally in your browser</p>
           </div>
         </div>
       </div>
@@ -35,12 +44,14 @@ export const HighScorePanel: React.FC<HighScorePanelProps> = ({ statistics }) =>
           return (
             <div
               key={item.label}
-              className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-3.5 text-center flex flex-col items-center justify-center shadow-inner"
+              className={`rounded-xl border p-3.5 text-center flex flex-col items-center justify-center transition-colors ${
+                isDark ? 'border-slate-800/80 bg-slate-950/60 shadow-inner' : 'border-slate-200 bg-slate-50 shadow-sm'
+              }`}
             >
               <Icon className={`h-4 w-4 mb-1 ${item.color}`} />
-              <div className="text-xs text-slate-400 font-medium">{item.label}</div>
-              <div className="text-xl font-black text-white font-mono mt-1">{item.score}</div>
-              <div className="text-[10px] text-slate-500">Personal Best</div>
+              <div className={`text-xs font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.label}</div>
+              <div className={`text-xl font-black font-mono mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.score}</div>
+              <div className={`text-[10px] ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Personal Best</div>
             </div>
           );
         })}
@@ -48,37 +59,42 @@ export const HighScorePanel: React.FC<HighScorePanelProps> = ({ statistics }) =>
 
       {/* Lifetime Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-        <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/40 p-3">
-          <div className="rounded-lg bg-blue-500/10 p-2 text-blue-400">
+        <div className={`flex items-center gap-3 rounded-xl border p-3 transition-colors ${
+          isDark ? 'border-slate-800 bg-slate-950/40' : 'border-slate-200 bg-slate-50 shadow-sm'
+        }`}>
+          <div className={`rounded-lg p-2 ${isDark ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
             <Gamepad2 className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Total Runs</div>
-            <div className="text-base font-bold text-white font-mono">{statistics.totalGamesPlayed}</div>
+            <div className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Total Runs</div>
+            <div className={`text-base font-bold font-mono ${isDark ? 'text-white' : 'text-slate-900'}`}>{statistics.totalGamesPlayed}</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/40 p-3">
-          <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-400">
+        <div className={`flex items-center gap-3 rounded-xl border p-3 transition-colors ${
+          isDark ? 'border-slate-800 bg-slate-950/40' : 'border-slate-200 bg-slate-50 shadow-sm'
+        }`}>
+          <div className={`rounded-lg p-2 ${isDark ? 'bg-emerald-500/10 text-emerald-400' : 'bg-emerald-50 text-emerald-600'}`}>
             <Apple className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Food Eaten</div>
-            <div className="text-base font-bold text-white font-mono">{statistics.totalFoodCollected}</div>
+            <div className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Food Eaten</div>
+            <div className={`text-base font-bold font-mono ${isDark ? 'text-white' : 'text-slate-900'}`}>{statistics.totalFoodCollected}</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/40 p-3">
-          <div className="rounded-lg bg-purple-500/10 p-2 text-purple-400">
+        <div className={`flex items-center gap-3 rounded-xl border p-3 transition-colors ${
+          isDark ? 'border-slate-800 bg-slate-950/40' : 'border-slate-200 bg-slate-50 shadow-sm'
+        }`}>
+          <div className={`rounded-lg p-2 ${isDark ? 'bg-purple-500/10 text-purple-400' : 'bg-purple-50 text-purple-600'}`}>
             <Ruler className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Longest Snake</div>
-            <div className="text-base font-bold text-white font-mono">{statistics.longestSnakeLength} units</div>
+            <div className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Longest Snake</div>
+            <div className={`text-base font-bold font-mono ${isDark ? 'text-white' : 'text-slate-900'}`}>{statistics.longestSnakeLength} units</div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-

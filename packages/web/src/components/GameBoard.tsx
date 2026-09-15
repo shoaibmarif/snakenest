@@ -238,7 +238,11 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-square max-w-[440px] sm:max-w-[480px] mx-auto rounded-2xl overflow-hidden border-2 border-slate-800 dark:border-slate-800/80 shadow-2xl bg-slate-950 touch-none select-none"
+      className={`relative w-full aspect-square max-w-[440px] sm:max-w-[480px] mx-auto rounded-2xl overflow-hidden border-2 shadow-2xl touch-none select-none transition-colors ${
+        settings.theme === 'dark'
+          ? 'border-slate-800 bg-slate-950 shadow-black/40'
+          : 'border-slate-300 bg-white shadow-slate-200'
+      }`}
     >
       <canvas
         ref={canvasRef}

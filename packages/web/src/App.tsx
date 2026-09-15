@@ -49,13 +49,19 @@ export const App: React.FC = () => {
     const root = document.documentElement;
     if (settings.theme === 'dark') {
       root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
     } else {
       root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
     }
   }, [settings.theme]);
 
+  const isDark = settings.theme === 'dark';
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 transition-colors selection:bg-emerald-500 selection:text-white">
+    <div className={`min-h-screen flex flex-col transition-colors duration-200 selection:bg-emerald-500 selection:text-white ${
+      isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
+    }`}>
       {/* Navigation Header */}
       <Header
         settings={settings}
@@ -68,10 +74,14 @@ export const App: React.FC = () => {
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
         {/* SEO Main Heading */}
         <div className="text-center space-y-1">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+          <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight transition-colors ${
+            isDark ? 'text-white' : 'text-slate-900'
+          }`}>
             Snake Game Online
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto">
+          <p className={`text-xs sm:text-sm max-w-lg mx-auto transition-colors ${
+            isDark ? 'text-slate-400' : 'text-slate-600'
+          }`}>
             Play the classic arcade game online for free. Navigate, grow your snake, and score high!
           </p>
         </div>
@@ -106,6 +116,7 @@ export const App: React.FC = () => {
           {/* Touch D-pad & Action Buttons */}
           <GameControls
             status={gameState.status}
+            theme={settings.theme}
             onDirectionChange={changeDirection}
             onTogglePause={togglePause}
             onRestart={restartGame}
@@ -116,12 +127,14 @@ export const App: React.FC = () => {
         <section id="mode-selector-section" className="space-y-6 pt-2">
           <GameModeSelector
             currentMode={settings.gameMode}
+            theme={settings.theme}
             onSelectMode={setGameMode}
             disabled={gameState.status === 'playing'}
           />
 
           <DifficultySelector
             currentDifficulty={settings.difficulty}
+            theme={settings.theme}
             onSelectDifficulty={setDifficulty}
             disabled={gameState.status === 'playing'}
           />
@@ -129,12 +142,12 @@ export const App: React.FC = () => {
 
         {/* Local Leaderboard & High Score Panel */}
         <section id="leaderboard">
-          <HighScorePanel statistics={statistics} />
+          <HighScorePanel statistics={statistics} theme={settings.theme} />
         </section>
 
         {/* Comprehensive SEO Content & FAQ */}
         <section id="how-to-play">
-          <Instructions />
+          <Instructions theme={settings.theme} />
         </section>
       </main>
 
@@ -148,7 +161,7 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <Footer />
+      <Footer theme={settings.theme} />
     </div>
   );
 };

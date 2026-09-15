@@ -13,6 +13,7 @@ import { soundManager } from '../utils/audio.js';
 
 interface GameControlsProps {
   status: GameStatus;
+  theme?: 'dark' | 'light';
   onDirectionChange: (dir: Direction) => void;
   onTogglePause: () => void;
   onRestart: () => void;
@@ -20,14 +21,29 @@ interface GameControlsProps {
 
 export const GameControls: React.FC<GameControlsProps> = ({
   status,
+  theme = 'dark',
   onDirectionChange,
   onTogglePause,
   onRestart
 }) => {
+  const isDark = theme === 'dark';
+
   const handleDirectionPress = (dir: Direction) => {
     soundManager.playClick();
     onDirectionChange(dir);
   };
+
+  const actionBtnClass = `flex-1 flex items-center justify-center gap-2 rounded-xl border py-2.5 px-4 text-xs font-semibold active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all shadow-sm ${
+    isDark
+      ? 'border-slate-800 bg-slate-900/90 text-slate-200 hover:bg-slate-800'
+      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300'
+  }`;
+
+  const dpadBtnClass = `h-14 w-14 rounded-2xl border active:bg-emerald-600 active:text-white active:scale-90 flex items-center justify-center shadow-md transition-all touch-manipulation ${
+    isDark
+      ? 'bg-slate-800/90 border-slate-700/80 text-slate-100'
+      : 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50'
+  }`;
 
   return (
     <div className="w-full max-w-[440px] sm:max-w-[480px] mx-auto flex flex-col items-center gap-4 select-none">
@@ -36,17 +52,17 @@ export const GameControls: React.FC<GameControlsProps> = ({
         <button
           onClick={onTogglePause}
           disabled={status !== 'playing' && status !== 'paused'}
-          className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-900/90 py-2.5 px-4 text-xs font-semibold text-slate-200 hover:bg-slate-800 active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all shadow-sm"
+          className={actionBtnClass}
           title="Pause or Resume (Spacebar)"
         >
           {status === 'paused' ? (
             <>
-              <Play className="h-4 w-4 fill-emerald-400 text-emerald-400" />
+              <Play className="h-4 w-4 fill-emerald-500 text-emerald-500" />
               <span>Resume</span>
             </>
           ) : (
             <>
-              <Pause className="h-4 w-4 text-blue-400" />
+              <Pause className="h-4 w-4 text-blue-500" />
               <span>Pause</span>
             </>
           )}
@@ -54,10 +70,10 @@ export const GameControls: React.FC<GameControlsProps> = ({
 
         <button
           onClick={onRestart}
-          className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-900/90 py-2.5 px-4 text-xs font-semibold text-slate-200 hover:bg-slate-800 active:scale-95 transition-all shadow-sm"
+          className={actionBtnClass}
           title="Restart Game (Enter)"
         >
-          <RotateCcw className="h-4 w-4 text-amber-400" />
+          <RotateCcw className="h-4 w-4 text-amber-500" />
           <span>Restart</span>
         </button>
       </div>
@@ -68,7 +84,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
         <button
           type="button"
           onClick={() => handleDirectionPress('UP')}
-          className="h-14 w-14 rounded-2xl bg-slate-800/90 border border-slate-700/80 active:bg-emerald-600 active:scale-90 flex items-center justify-center text-slate-100 shadow-md transition-all touch-manipulation"
+          className={dpadBtnClass}
           aria-label="Move Up"
         >
           <ArrowUp className="h-6 w-6" />
@@ -79,20 +95,22 @@ export const GameControls: React.FC<GameControlsProps> = ({
           <button
             type="button"
             onClick={() => handleDirectionPress('LEFT')}
-            className="h-14 w-14 rounded-2xl bg-slate-800/90 border border-slate-700/80 active:bg-emerald-600 active:scale-90 flex items-center justify-center text-slate-100 shadow-md transition-all touch-manipulation"
+            className={dpadBtnClass}
             aria-label="Move Left"
           >
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="h-10 w-10 rounded-full bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-600 text-xs font-mono font-bold">
+          <div className={`h-10 w-10 rounded-full border flex items-center justify-center text-xs font-mono font-bold ${
+            isDark ? 'bg-slate-900/80 border-slate-800 text-slate-600' : 'bg-slate-100 border-slate-200 text-slate-400'
+          }`}>
             DPAD
           </div>
 
           <button
             type="button"
             onClick={() => handleDirectionPress('RIGHT')}
-            className="h-14 w-14 rounded-2xl bg-slate-800/90 border border-slate-700/80 active:bg-emerald-600 active:scale-90 flex items-center justify-center text-slate-100 shadow-md transition-all touch-manipulation"
+            className={dpadBtnClass}
             aria-label="Move Right"
           >
             <ArrowRight className="h-6 w-6" />
@@ -103,7 +121,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
         <button
           type="button"
           onClick={() => handleDirectionPress('DOWN')}
-          className="h-14 w-14 rounded-2xl bg-slate-800/90 border border-slate-700/80 active:bg-emerald-600 active:scale-90 flex items-center justify-center text-slate-100 shadow-md transition-all touch-manipulation"
+          className={dpadBtnClass}
           aria-label="Move Down"
         >
           <ArrowDown className="h-6 w-6" />
@@ -112,4 +130,3 @@ export const GameControls: React.FC<GameControlsProps> = ({
     </div>
   );
 };
-

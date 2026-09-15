@@ -72,8 +72,20 @@
     ]
   }
   </script>
+  <script>
+    try {
+      var stored = localStorage.getItem('snake-game-settings-v1');
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (parsed.theme === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }
+    } catch (e) {}
+  </script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-emerald-500 selection:text-white">
+<body class="min-h-screen antialiased selection:bg-emerald-500 selection:text-white">
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
