@@ -2,7 +2,49 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-/* Base html font and rendering setup */
+@theme {
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+}
+
+/* =========================================================================
+   TYPOGRAPHY: HARMONIZED MONTSERRAT & POPPINS SYSTEM
+   - Montserrat: Headings, Hero Titles, Brand Badges, Strong Display
+   - Poppins: Body Copy, Instructions, FAQ, Controls, Descriptions
+   ========================================================================= */
+
+:root {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-feature-settings: 'tnum' on, 'cv02' on, 'cv03' on, 'cv04' on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Headings, Hero titles, and Brand Displays use Montserrat */
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.font-montserrat,
+.brand-font {
+  font-family: 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Paragraphs, descriptions, and UI text use Poppins for optimal reading comfort */
+p, label, li,
+.font-body,
+.font-poppins {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
 html {
   color-scheme: dark;
 }
@@ -13,7 +55,69 @@ html:not(.dark) {
 }
 
 /* =========================================================================
-   LIGHT THEME STYLING RULES (Applied when .dark class is absent)
+   CYBER-ARCADE GLASS & GLOW UTILITIES
+   ========================================================================= */
+
+/* Ambient mesh glow backdrop behind game arena */
+.arcade-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.14) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(20px);
+}
+
+html:not(.dark) .arcade-ambient-glow {
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 75%);
+}
+
+/* Glassmorphic Cyber Panels */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+html:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03), inset 0 1px 0 0 #ffffff;
+}
+
+/* Tactile 3D Buttons */
+.tactile-btn {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactile-btn:hover {
+  transform: translateY(-1px);
+}
+
+.tactile-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Neon Glow Accents */
+.emerald-glow {
+  box-shadow: 0 0 20px -2px rgba(16, 185, 129, 0.45);
+}
+
+.amber-glow {
+  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.45);
+}
+
+/* =========================================================================
+   LIGHT THEME GLOBAL OVERRIDES
    ========================================================================= */
 
 html:not(.dark) body {
@@ -21,31 +125,21 @@ html:not(.dark) body {
   color: #0f172a !important;
 }
 
-/* Top App Wrapper & Containers */
 html:not(.dark) .min-h-screen.bg-slate-950 {
   background-color: #f8fafc !important;
   color: #0f172a !important;
 }
 
-/* Header */
-html:not(.dark) header {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+/* Light Mode Card Surfaces */
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-900\/40,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/90 {
+  background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
 }
 
-html:not(.dark) header .text-white {
-  color: #0f172a !important;
-}
-
-/* All Headings & Titles in Light Mode */
-html:not(.dark) h1,
-html:not(.dark) h2,
-html:not(.dark) h3,
-html:not(.dark) .text-white {
-  color: #0f172a !important;
-}
-
-/* Dark surfaces become clean white/light slate */
 html:not(.dark) .bg-slate-950,
 html:not(.dark) .bg-slate-950\/40,
 html:not(.dark) .bg-slate-950\/50,
@@ -55,23 +149,7 @@ html:not(.dark) .bg-slate-950\/85 {
   background-color: #f1f5f9 !important;
 }
 
-html:not(.dark) .bg-slate-900,
-html:not(.dark) .bg-slate-900\/40,
-html:not(.dark) .bg-slate-900\/60,
-html:not(.dark) .bg-slate-900\/80,
-html:not(.dark) .bg-slate-900\/90 {
-  background-color: #ffffff !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-}
-
-html:not(.dark) .bg-slate-800,
-html:not(.dark) .bg-slate-800\/90,
-html:not(.dark) .bg-slate-800\/60,
-html:not(.dark) .bg-slate-800\/50 {
-  background-color: #f1f5f9 !important;
-}
-
-/* Borders */
+/* Light Mode Borders */
 html:not(.dark) .border-slate-800,
 html:not(.dark) .border-slate-800\/60,
 html:not(.dark) .border-slate-800\/80,
@@ -80,7 +158,14 @@ html:not(.dark) .border-slate-700\/80 {
   border-color: #e2e8f0 !important;
 }
 
-/* Text Colors */
+/* Light Mode Text Headings & Body */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
 html:not(.dark) .text-slate-100 {
   color: #0f172a !important;
 }
@@ -93,46 +178,18 @@ html:not(.dark) .text-slate-300 {
   color: #334155 !important;
 }
 
-html:not(.dark) .text-slate-400 {
-  color: #64748b !important;
-}
-
+html:not(.dark) .text-slate-400,
 html:not(.dark) .text-slate-500 {
   color: #64748b !important;
 }
 
-/* Canvas Board Wrapper */
-html:not(.dark) .border-2.border-slate-800 {
-  border-color: #cbd5e1 !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
-}
-
-/* Mobile D-Pad Buttons in Light Mode */
-html:not(.dark) .touch-manipulation {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08) !important;
-}
-
-html:not(.dark) .touch-manipulation:active {
-  background-color: #10b981 !important;
-  color: #ffffff !important;
-}
-
-/* Game Overlay in Light Mode */
-html:not(.dark) .bg-slate-950\/80.backdrop-blur-md {
+/* Light Mode Header & Footer */
+html:not(.dark) header {
   background-color: rgba(255, 255, 255, 0.88) !important;
-}
-
-/* Footer in Light Mode */
-html:not(.dark) footer {
-  background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
 }
 
-/* Modals & Dialogs in Light Mode */
-html:not(.dark) .fixed.bg-slate-950\/80 {
-  background-color: rgba(15, 23, 42, 0.5) !important;
+html:not(.dark) footer {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
 }

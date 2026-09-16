@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Keyboard, Gamepad2, Sparkles, BookOpen } from 'lucide-react';
+import { ChevronDown, Keyboard, Gamepad2, Sparkles, BookOpen } from 'lucide-react';
 
 interface FaqItem {
   question: string;
@@ -166,30 +166,46 @@ export const Instructions: React.FC<InstructionsProps> = ({ theme = 'dark' }) =>
             return (
               <div
                 key={faq.question}
-                className={`rounded-xl border overflow-hidden transition-colors ${
-                  isDark ? 'border-slate-800/80 bg-slate-950/50' : 'border-slate-200 bg-slate-50'
+                className={`rounded-xl border overflow-hidden transition-all duration-200 ${
+                  isDark
+                    ? 'border-slate-800/80 bg-slate-950/50 hover:border-slate-700/80'
+                    : 'border-slate-200 bg-slate-50 hover:border-slate-300'
                 }`}
               >
                 <button
+                  type="button"
                   onClick={() => toggleFaq(idx)}
-                  className={`w-full flex items-center justify-between p-4 text-left text-xs sm:text-sm font-semibold transition-colors ${
+                  className={`w-full flex items-center justify-between p-4 text-left text-xs sm:text-sm font-semibold transition-colors cursor-pointer select-none ${
                     isDark ? 'text-slate-200 hover:text-white' : 'text-slate-800 hover:text-slate-950'
                   }`}
+                  aria-expanded={isOpen}
                 >
-                  <span>{faq.question}</span>
-                  {isOpen ? (
-                    <ChevronUp className="h-4 w-4 opacity-75 shrink-0 ml-2" />
-                  ) : (
-                    <ChevronDown className="h-4 w-4 opacity-75 shrink-0 ml-2" />
-                  )}
+                  <span className="pr-2">{faq.question}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 opacity-75 shrink-0 transition-transform duration-300 ease-out ${
+                      isOpen ? 'rotate-180 text-emerald-500' : 'text-slate-400'
+                    }`}
+                  />
                 </button>
-                {isOpen && (
-                  <div className={`px-4 pb-4 text-xs sm:text-sm border-t pt-3 leading-relaxed ${
-                    isDark ? 'text-slate-400 border-slate-800/60' : 'text-slate-600 border-slate-200'
-                  }`}>
-                    {faq.answer}
+
+                {/* Smooth Animated Accordion Drawer */}
+                <div
+                  className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div
+                      className={`px-4 pb-4 text-xs sm:text-sm border-t pt-3 leading-relaxed transition-opacity duration-300 ${
+                        isOpen ? 'opacity-100' : 'opacity-0'
+                      } ${
+                        isDark ? 'text-slate-400 border-slate-800/60' : 'text-slate-600 border-slate-200'
+                      }`}
+                    >
+                      {faq.answer}
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

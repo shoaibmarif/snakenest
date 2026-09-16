@@ -12,9 +12,38 @@ import { HighScorePanel } from './components/HighScorePanel.js';
 import { SettingsPanel } from './components/SettingsPanel.js';
 import { Instructions } from './components/Instructions.js';
 import { Footer } from './components/Footer.js';
+import { PrivacyPolicy } from './components/PrivacyPolicy.js';
+import { NotFoundPage } from './components/NotFoundPage.js';
+import { usePageSEO } from './hooks/usePageSEO.js';
 
 export const App: React.FC = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  // Client-side lightweight routing
+  const getInitialPath = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '/';
+  };
+
+  const [currentPath, setCurrentPath] = useState<string>(getInitialPath);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (path: string) => {
+    if (path !== window.location.pathname) {
+      window.history.pushState({}, '', path);
+      setCurrentPath(path);
+    }
+  };
 
   const {
     gameState,
@@ -32,7 +61,38 @@ export const App: React.FC = () => {
     resetData
   } = useSnakeGame();
 
-  // Bind Keyboard Controls
+  const isHomeRoute = currentPath === '/' || currentPath === '/index.html';
+  const isPrivacyRoute = currentPath === '/privacy-policy' || currentPath === '/privacy-policy/' || currentPath === '/privacy';
+  const isNotFound = !isHomeRoute && !isPrivacyRoute;
+
+  // Dynamic Route SEO Management
+  const seoConfig = isPrivacyRoute
+    ? {
+        title: 'Privacy Policy – SnakeNest Snake Game',
+        description:
+          'SnakeNest privacy policy: 100% client-side, zero personal data tracking, private local-storage high score persistence, and offline Web Audio architecture.',
+        canonicalUrl: 'https://snakenest.netlify.app/privacy-policy',
+        robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+      }
+    : isNotFound
+    ? {
+        title: '404 - Page Not Found | SnakeNest Snake Game',
+        description:
+          'The requested coordinate or game route does not exist. Return to SnakeNest to play the classic Snake Game.',
+        canonicalUrl: 'https://snakenest.netlify.app/',
+        robots: 'noindex, nofollow'
+      }
+    : {
+        title: 'Snake Game Online – Play Classic Snake Game Free',
+        description:
+          'Play Snake Game online for free. Enjoy classic Snake gameplay with multiple modes, difficulty levels, high scores, keyboard controls, and mobile touch support.',
+        canonicalUrl: 'https://snakenest.netlify.app/',
+        robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+      };
+
+  usePageSEO(seoConfig);
+
+  // Bind Keyboard Controls only when on game view
   useKeyboardControls({
     onDirectionChange: changeDirection,
     onTogglePause: togglePause,
@@ -41,7 +101,7 @@ export const App: React.FC = () => {
         startGame();
       }
     },
-    isEnabled: !isSettingsOpen
+    isEnabled: !isSettingsOpen && isHomeRoute
   });
 
   // Apply dark/light class to root element
@@ -59,7 +119,7 @@ export const App: React.FC = () => {
   const isDark = settings.theme === 'dark';
 
   return (
-    <div className={`min-h-screen flex flex-col transition-colors duration-200 selection:bg-emerald-500 selection:text-white ${
+    <div className={`min-h-screen w-full overflow-x-hidden flex flex-col transition-colors duration-200 selection:bg-emerald-500 selection:text-white ${
       isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
       {/* Navigation Header */}
@@ -68,88 +128,118 @@ export const App: React.FC = () => {
         onToggleSound={toggleSound}
         onToggleTheme={toggleTheme}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        onNavigateHome={() => navigateTo('/')}
       />
 
-      {/* Main Game Workbench Area */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
-        {/* SEO Main Heading */}
-        <div className="text-center space-y-1">
-          <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight transition-colors ${
-            isDark ? 'text-white' : 'text-slate-900'
-          }`}>
-            Snake Game Online
-          </h1>
-          <p className={`text-xs sm:text-sm max-w-lg mx-auto transition-colors ${
-            isDark ? 'text-slate-400' : 'text-slate-600'
-          }`}>
-            Play the classic arcade game online for free. Navigate, grow your snake, and score high!
-          </p>
-        </div>
+      {/* 1. Privacy Policy Page Route */}
+      {isPrivacyRoute && (
+        <main className="flex-1 w-full max-w-7xl mx-auto">
+          <PrivacyPolicy
+            theme={settings.theme}
+            onNavigateHome={() => navigateTo('/')}
+          />
+        </main>
+      )}
 
-        {/* Game Arena Container */}
-        <section className="flex flex-col items-center gap-4">
-          {/* Score Board */}
-          <ScoreBoard gameState={gameState} settings={settings} />
+      {/* 2. 404 Page Not Found Route */}
+      {isNotFound && (
+        <main className="flex-1 w-full max-w-7xl mx-auto flex items-center justify-center">
+          <NotFoundPage
+            theme={settings.theme}
+            onNavigateHome={() => navigateTo('/')}
+          />
+        </main>
+      )}
 
-          {/* Interactive Game Board with Overlay */}
-          <div className="relative w-full max-w-[440px] sm:max-w-[480px]">
-            <GameBoard
-              gameState={gameState}
-              settings={settings}
-              onDirectionChange={changeDirection}
-              onTogglePause={togglePause}
-              onStartOrRestart={startGame}
-            />
-            <GameOverlay
-              gameState={gameState}
-              settings={settings}
-              onStart={startGame}
-              onResume={togglePause}
-              onRestart={restartGame}
-              onOpenModesModal={() => {
-                const el = document.getElementById('mode-selector-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            />
+      {/* 3. Main Game Workbench Area (Home Route) */}
+      {isHomeRoute && (
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
+          {/* SEO Main Heading with Generous Breathing Spacing */}
+          <div className="text-center space-y-2 pt-2 sm:pt-4">
+            <h1 className={`text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight transition-colors ${
+              isDark ? 'text-white' : 'text-slate-900'
+            }`}>
+              Snake Game Online
+            </h1>
+            <p className={`text-xs sm:text-sm max-w-lg mx-auto leading-relaxed transition-colors ${
+              isDark ? 'text-slate-400' : 'text-slate-500'
+            }`}>
+              Navigate the arena, consume glowing fruit, and shatter high-score records across 4 unique battle modes.
+            </p>
           </div>
 
-          {/* Touch D-pad & Action Buttons */}
-          <GameControls
-            status={gameState.status}
-            theme={settings.theme}
-            onDirectionChange={changeDirection}
-            onTogglePause={togglePause}
-            onRestart={restartGame}
-          />
-        </section>
+          {/* Unified Game Stage: Side-by-Side on Desktop (Arena + Controls/Selectors), Single-Column on Mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start justify-center">
+            {/* Left / Center Column: Game Board Arena & Score HUD */}
+            <section className="relative flex flex-col items-center gap-5 sm:gap-6 w-full max-w-full lg:col-span-7 xl:col-span-7">
+              {/* Score Board */}
+              <ScoreBoard gameState={gameState} settings={settings} />
 
-        {/* Mode and Difficulty Selectors */}
-        <section id="mode-selector-section" className="space-y-6 pt-2">
-          <GameModeSelector
-            currentMode={settings.gameMode}
-            theme={settings.theme}
-            onSelectMode={setGameMode}
-            disabled={gameState.status === 'playing'}
-          />
+              {/* Interactive Game Board with Overlay */}
+              <div className="relative w-full max-w-[min(100%,460px)] lg:max-w-[480px]">
+                <div className="arcade-ambient-glow" />
+                <GameBoard
+                  gameState={gameState}
+                  settings={settings}
+                  onDirectionChange={changeDirection}
+                  onTogglePause={togglePause}
+                  onStartOrRestart={startGame}
+                />
+                <GameOverlay
+                  gameState={gameState}
+                  settings={settings}
+                  onStart={startGame}
+                  onResume={togglePause}
+                  onRestart={restartGame}
+                  onOpenModesModal={() => {
+                    const el = document.getElementById('mode-selector-section');
+                    el?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                />
+              </div>
 
-          <DifficultySelector
-            currentDifficulty={settings.difficulty}
-            theme={settings.theme}
-            onSelectDifficulty={setDifficulty}
-            disabled={gameState.status === 'playing'}
-          />
-        </section>
+              {/* Touch D-pad & Action Buttons */}
+              <GameControls
+                status={gameState.status}
+                theme={settings.theme}
+                onDirectionChange={changeDirection}
+                onTogglePause={togglePause}
+                onRestart={restartGame}
+              />
+            </section>
 
-        {/* Local Leaderboard & High Score Panel */}
-        <section id="leaderboard">
-          <HighScorePanel statistics={statistics} theme={settings.theme} />
-        </section>
+            {/* Right Column: Mode Selector, Difficulty Selector & Quick Stats - visible in the same screen on desktop */}
+            <aside className="w-full lg:col-span-5 xl:col-span-5 space-y-6 sm:space-y-7">
+              {/* Mode and Difficulty Selectors */}
+              <section id="mode-selector-section" className="space-y-5">
+                <GameModeSelector
+                  currentMode={settings.gameMode}
+                  theme={settings.theme}
+                  onSelectMode={setGameMode}
+                  disabled={gameState.status === 'playing'}
+                />
 
-        {/* Comprehensive SEO Content & FAQ */}
-        <section id="how-to-play">
-          <Instructions theme={settings.theme} />
-        </section>
-      </main>
+                <DifficultySelector
+                  currentDifficulty={settings.difficulty}
+                  theme={settings.theme}
+                  onSelectDifficulty={setDifficulty}
+                  disabled={gameState.status === 'playing'}
+                />
+              </section>
+
+              {/* Local Leaderboard & High Score Panel */}
+              <section id="leaderboard">
+                <HighScorePanel statistics={statistics} theme={settings.theme} />
+              </section>
+            </aside>
+          </div>
+
+          {/* Comprehensive SEO Content & FAQ below the unified game stage */}
+          <section id="how-to-play" className="pt-8 sm:pt-12 border-t border-slate-200/60 dark:border-slate-800/60">
+            <Instructions theme={settings.theme} />
+          </section>
+        </main>
+      )}
 
       {/* Settings Modal */}
       <SettingsPanel
@@ -161,7 +251,11 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <Footer theme={settings.theme} />
+      <Footer
+        theme={settings.theme}
+        onNavigateHome={() => navigateTo('/')}
+        onNavigatePrivacy={() => navigateTo('/privacy-policy')}
+      />
     </div>
   );
 };

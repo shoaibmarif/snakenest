@@ -33,22 +33,22 @@ export const GameControls: React.FC<GameControlsProps> = ({
     onDirectionChange(dir);
   };
 
-  const actionBtnClass = `flex-1 flex items-center justify-center gap-2 rounded-xl border py-2.5 px-4 text-xs font-semibold active:scale-95 disabled:opacity-40 disabled:pointer-events-none transition-all shadow-sm ${
+  const actionBtnClass = `flex-1 flex items-center justify-center gap-2 rounded-2xl border py-3 px-4 text-xs font-semibold tracking-wide transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:pointer-events-none ${
     isDark
-      ? 'border-slate-800 bg-slate-900/90 text-slate-200 hover:bg-slate-800'
-      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300'
+      ? 'border-white/10 bg-slate-900/80 text-slate-200 hover:bg-slate-800/90 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+      : 'border-slate-200/90 bg-white text-slate-700 hover:bg-slate-50 shadow-[0_4px_12px_rgba(15,23,42,0.04),inset_0_1px_0_0_#ffffff]'
   }`;
 
-  const dpadBtnClass = `h-14 w-14 rounded-2xl border active:bg-emerald-600 active:text-white active:scale-90 flex items-center justify-center shadow-md transition-all touch-manipulation ${
+  const dpadBtnClass = `h-12 w-12 sm:h-14 sm:w-14 rounded-2xl border flex items-center justify-center transition-all duration-150 active:scale-90 active:bg-emerald-500 active:text-white touch-manipulation select-none ${
     isDark
-      ? 'bg-slate-800/90 border-slate-700/80 text-slate-100'
-      : 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50'
+      ? 'bg-slate-900/90 border-white/10 text-slate-100 hover:border-white/20 shadow-[0_6px_16px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.1)]'
+      : 'bg-white border-slate-200 text-slate-800 hover:border-slate-300 shadow-[0_6px_16px_rgba(15,23,42,0.06),inset_0_1px_0_0_#ffffff]'
   }`;
 
   return (
-    <div className="w-full max-w-[440px] sm:max-w-[480px] mx-auto flex flex-col items-center gap-4 select-none">
-      {/* Action Buttons Bar */}
-      <div className="w-full flex items-center justify-between gap-3 px-2">
+    <div className="w-full max-w-[440px] sm:max-w-[480px] mx-auto flex flex-col items-center gap-4 sm:gap-5 select-none pt-1">
+      {/* Top Action Bar (Pause / Restart) */}
+      <div className="w-full flex items-center justify-between gap-3 px-1">
         <button
           onClick={onTogglePause}
           disabled={status !== 'playing' && status !== 'paused'}
@@ -78,8 +78,8 @@ export const GameControls: React.FC<GameControlsProps> = ({
         </button>
       </div>
 
-      {/* On-screen D-Pad for Touch and Mobile Devices */}
-      <div className="flex flex-col items-center gap-1.5 py-1 sm:hidden">
+      {/* Tactile On-screen D-Pad for Mobile & Touch */}
+      <div className="flex flex-col items-center gap-2 sm:gap-2.5 py-1 sm:hidden">
         {/* UP Button */}
         <button
           type="button"
@@ -87,22 +87,24 @@ export const GameControls: React.FC<GameControlsProps> = ({
           className={dpadBtnClass}
           aria-label="Move Up"
         >
-          <ArrowUp className="h-6 w-6" />
+          <ArrowUp className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
 
         {/* LEFT, CENTER, RIGHT Row */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button
             type="button"
             onClick={() => handleDirectionPress('LEFT')}
             className={dpadBtnClass}
             aria-label="Move Left"
           >
-            <ArrowLeft className="h-6 w-6" />
+            <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
 
-          <div className={`h-10 w-10 rounded-full border flex items-center justify-center text-xs font-mono font-bold ${
-            isDark ? 'bg-slate-900/80 border-slate-800 text-slate-600' : 'bg-slate-100 border-slate-200 text-slate-400'
+          <div className={`h-9 w-9 sm:h-11 sm:w-11 rounded-full border flex items-center justify-center text-[9px] sm:text-[10px] font-mono font-black tracking-widest ${
+            isDark
+              ? 'bg-slate-950/80 border-white/5 text-slate-600'
+              : 'bg-slate-100 border-slate-200 text-slate-400'
           }`}>
             DPAD
           </div>
@@ -113,7 +115,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
             className={dpadBtnClass}
             aria-label="Move Right"
           >
-            <ArrowRight className="h-6 w-6" />
+            <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
         </div>
 
@@ -124,7 +126,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
           className={dpadBtnClass}
           aria-label="Move Down"
         >
-          <ArrowDown className="h-6 w-6" />
+          <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
       </div>
     </div>
