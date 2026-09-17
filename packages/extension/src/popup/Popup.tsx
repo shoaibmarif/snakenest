@@ -45,7 +45,7 @@ export const Popup: React.FC = () => {
 
   return (
     <div
-      className={`w-[500px] h-[590px] flex flex-col justify-between border-0 outline-none select-none transition-colors duration-200 overflow-hidden ${
+      className={`w-[560px] h-[590px] flex flex-col justify-between border-0 outline-none select-none transition-colors duration-200 overflow-hidden ${
         settings.theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'
       }`}
     >
