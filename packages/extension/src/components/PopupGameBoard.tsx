@@ -154,6 +154,7 @@ export const PopupGameBoard: React.FC<PopupGameBoardProps> = ({
       const bodyWidth = cellSize * 0.76;
 
       // Draw connected body
+      // Draw connected body segments
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
@@ -167,6 +168,44 @@ export const PopupGameBoard: React.FC<PopupGameBoardProps> = ({
         else ctx.lineTo(sx, sy);
       });
       ctx.stroke();
+
+      for (let i = snake.length - 1; i >= 1; i--) {
+        const curr = snake[i];
+        const next = snake[i - 1];
+
+        // Skip connection if wrapping around border in endless mode
+        const isWrapping =
+          Math.abs(curr.x - next.x) > 1 || Math.abs(curr.y - next.y) > 1;
+
+        const x1 = (curr.x + 0.5) * cellSize;
+        const y1 = (curr.y + 0.5) * cellSize;
+        const x2 = (next.x + 0.5) * cellSize;
+        const y2 = (next.y + 0.5) * cellSize;
+
+        if (!isWrapping) {
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        } else {
+          // Draw separate rounded cap if wrapping across border
+          ctx.fillStyle = ctx.strokeStyle;
+          ctx.beginPath();
+          ctx.arc(x1, y1, bodyWidth * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Draw segment nodes for smooth joints
+      for (let i = 1; i < snake.length; i++) {
+        const seg = snake[i];
+        const sx = (seg.x + 0.5) * cellSize;
+        const sy = (seg.y + 0.5) * cellSize;
+        ctx.fillStyle = isDark ? '#10b981' : '#059669';
+        ctx.beginPath();
+        ctx.arc(sx, sy, bodyWidth * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       // Snake Head with Eyes
       const head = snake[0];
