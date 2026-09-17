@@ -240,8 +240,8 @@ export const PopupGameBoard: React.FC<PopupGameBoardProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full aspect-square max-w-[340px] mx-auto rounded-2xl overflow-hidden border-2 shadow-lg select-none ${
-        isDark ? 'border-emerald-500/30 bg-[#090e17]' : 'border-slate-200 bg-white'
+      className={`relative w-full aspect-square max-w-[365px] mx-auto rounded-2xl overflow-hidden shadow-xl select-none ${
+        isDark ? 'bg-[#090e17]' : 'bg-slate-50'
       }`}
     >
       <canvas
@@ -332,3 +332,4 @@ export const PopupGameBoard: React.FC<PopupGameBoardProps> = ({
     </div>
   );
 };
+

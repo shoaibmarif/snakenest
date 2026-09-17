@@ -76,18 +76,7 @@ export const PopupScoreBar: React.FC<PopupScoreBarProps> = ({
           )}
         </div>
       </div>
-
-      {/* Mode & Difficulty Pill */}
-      <div className="flex items-center justify-between px-1 text-[10px]">
-        <div className="flex items-center gap-1 font-mono">
-          <span className="capitalize font-bold text-emerald-500">{settings.gameMode}</span>
-          <span className="opacity-40">•</span>
-          <span className="capitalize font-medium text-blue-400">{settings.difficulty}</span>
-        </div>
-        <div className="text-slate-400 font-mono text-[9px]">
-          Level {gameState.level}
-        </div>
-      </div>
     </div>
   );
 };
+

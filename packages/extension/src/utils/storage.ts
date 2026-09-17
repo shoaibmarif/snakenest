@@ -80,3 +80,4 @@ export function resetStoredData(): { settings: GameSettings; statistics: GameSta
     statistics: DEFAULT_GAME_STATISTICS
   };
 }
+

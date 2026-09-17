@@ -5,7 +5,6 @@ import { PopupHeader } from '../components/PopupHeader.js';
 import { PopupScoreBar } from '../components/PopupScoreBar.js';
 import { PopupGameBoard } from '../components/PopupGameBoard.js';
 import { PopupControls } from '../components/PopupControls.js';
-import { PopupFooter } from '../components/PopupFooter.js';
 
 export const Popup: React.FC = () => {
   const {
@@ -45,12 +44,14 @@ export const Popup: React.FC = () => {
   }, [settings.theme]);
 
   return (
-    <div className={`w-[380px] min-h-[590px] flex flex-col justify-between select-none transition-colors duration-200 ${
-      settings.theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'
-    }`}>
-      {/* Top Section */}
-      <div className="flex flex-col">
-        {/* Navigation & Header */}
+    <div
+      className={`w-[500px] h-[590px] flex flex-col justify-between border-0 outline-none select-none transition-colors duration-200 overflow-hidden ${
+        settings.theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'
+      }`}
+    >
+      {/* Container */}
+      <div className="flex flex-col h-full justify-between pb-2">
+        {/* Navigation & Header with GitHub, LinkedIn & Version */}
         <PopupHeader
           settings={settings}
           onToggleTheme={toggleTheme}
@@ -64,7 +65,7 @@ export const Popup: React.FC = () => {
         />
 
         {/* Arcade Canvas Game Board */}
-        <div className="flex justify-center items-center py-1.5 px-3">
+        <div className="flex justify-center items-center py-1 px-3">
           <PopupGameBoard
             gameState={gameState}
             settings={settings}
@@ -74,22 +75,15 @@ export const Popup: React.FC = () => {
           />
         </div>
 
-        {/* Arcade Controls & D-Pad */}
+        {/* Mode & Difficulty Controls */}
         <PopupControls
-          gameState={gameState}
           gameMode={settings.gameMode}
           difficulty={settings.difficulty}
-          onDirectionChange={changeDirection}
+          theme={settings.theme}
           onSetGameMode={setGameMode}
           onSetDifficulty={setDifficulty}
-          onStartGame={startGame}
-          onTogglePause={togglePause}
-          onRestartGame={restartGame}
         />
       </div>
-
-      {/* Social Links & Web App Links Footer */}
-      <PopupFooter />
     </div>
   );
 };

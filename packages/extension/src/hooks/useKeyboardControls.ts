@@ -67,3 +67,4 @@ export function useKeyboardControls({
     };
   }, [isEnabled, onDirectionChange, onTogglePause, onStartOrRestart]);
 }
+
