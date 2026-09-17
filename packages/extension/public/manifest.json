@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "SnakeNest – Classic Retro Snake Game",
   "version": "1.0.0",
-  "description": "Play the classic Snake Game directly in your browser popup. 4 battle modes, difficulty levels, local high scores, retro sound effects, and offline play.",
+  "description": "Play the classic retro Snake Game in your browser popup with 4 arcade modes, difficulties, sound effects, and 100% offline play.",
   "homepage_url": "https://snakenest.netlify.app/",
   "permissions": [
     "storage",

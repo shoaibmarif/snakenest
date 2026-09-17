@@ -10,7 +10,6 @@ export * from './game/scoring.js';
 export * from './game/gameModes.js';
 export * from './game/gameEngine.js';
 
-export const CORE_VERSION = '0.1.0';
 export const CORE_VERSION = '1.0.0';
 
 export function createDefaultWorkspace(name = 'Modern Monorepo'): import('./models/types.js').WorkspaceMetadata {
