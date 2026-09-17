@@ -428,7 +428,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full aspect-square max-w-[440px] sm:max-w-[480px] mx-auto rounded-3xl overflow-hidden border-2 touch-none select-none transition-all duration-300 ${
+      className={`relative w-full aspect-square max-w-[440px] sm:max-w-[480px] lg:max-w-none mx-auto rounded-3xl overflow-hidden border-2 touch-none select-none transition-all duration-300 ${
         isDark
           ? 'border-emerald-500/30 bg-[#090e17] shadow-[0_0_50px_-10px_rgba(16,185,129,0.2)]'
           : 'border-slate-300 bg-white shadow-[0_15px_35px_-5px_rgba(15,23,42,0.1)]'

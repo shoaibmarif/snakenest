@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { GameState, GameSettings } from '@project/core';
 import {
   Play,
@@ -7,11 +7,8 @@ import {
   Clock,
   Apple,
   Sparkles,
-  Gamepad2,
-  Share2,
-  Layers
+  Gamepad2
 } from 'lucide-react';
-import { shareGameScore } from '../utils/share.js';
 
 interface GameOverlayProps {
   gameState: GameState;
@@ -27,22 +24,13 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
   settings,
   onStart,
   onResume,
-  onRestart,
-  onOpenModesModal
+  onRestart
 }) => {
-  const [shareFeedback, setShareFeedback] = useState<string | null>(null);
-
   if (gameState.status === 'playing') return null;
 
   const isDark = settings.theme === 'dark';
   const headingColor = isDark ? 'text-white' : 'text-slate-900';
   const subTextColor = isDark ? 'text-slate-400' : 'text-slate-600';
-
-  const handleShare = async () => {
-    const res = await shareGameScore(gameState.score, settings.gameMode);
-    setShareFeedback(res.message);
-    setTimeout(() => setShareFeedback(null), 3500);
-  };
 
   const secondaryBtnClass = isDark
     ? 'border-white/10 bg-slate-900/80 text-slate-200 hover:bg-slate-800 shadow-sm'
@@ -189,38 +177,7 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
               className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 px-4 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-bold text-white shadow-[0_10px_20px_-4px_rgba(16,185,129,0.4)] hover:brightness-110 transition-all active:scale-95 cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span>Play Again</span>
             </button>
-
-
-
-
-
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={handleShare}
-                className={`flex items-center justify-center gap-1.5 rounded-2xl border py-2 sm:py-2.5 px-2.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${secondaryBtnClass}`}
-              >
-                <Share2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-blue-500" />
-                <span>Share Run</span>
-              </button>
-
-              {onOpenModesModal && (
-                <button
-                  onClick={onOpenModesModal}
-                  className={`flex items-center justify-center gap-1.5 rounded-2xl border py-2 sm:py-2.5 px-2.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${secondaryBtnClass}`}
-                >
-                  <Layers className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-purple-500" />
-                  <span>Modes</span>
-                </button>
-              )}
-            </div>
-
-            {shareFeedback && (
-              <div className="text-[10px] sm:text-[11px] text-emerald-500 font-semibold animate-in fade-in">
-                {shareFeedback}
-              </div>
-            )}
           </div>
         </div>
       )}

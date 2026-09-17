@@ -46,7 +46,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
   }`;
 
   return (
-    <div className="w-full max-w-[440px] sm:max-w-[480px] mx-auto flex flex-col items-center gap-4 sm:gap-5 select-none pt-1">
+    <div className="w-full max-w-[440px] sm:max-w-[480px] lg:max-w-none mx-auto flex flex-col items-center gap-4 sm:gap-5 select-none pt-1">
       {/* Top Action Bar (Pause / Restart) */}
       <div className="w-full flex items-center justify-between gap-3 px-1">
         <button

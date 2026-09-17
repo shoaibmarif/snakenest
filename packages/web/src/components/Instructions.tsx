@@ -54,7 +54,7 @@ export const Instructions: React.FC<InstructionsProps> = ({ theme = 'dark' }) =>
   const borderColor = isDark ? 'border-slate-800' : 'border-slate-200';
 
   return (
-    <section className="w-full max-w-4xl mx-auto space-y-8 pt-4">
+    <section className="w-full mx-auto space-y-8 pt-4">
       {/* Introduction & SEO Headings */}
       <article className={`rounded-2xl border p-6 sm:p-8 backdrop-blur-sm space-y-6 transition-colors ${articleBg}`}>
         <header className={`border-b pb-4 ${borderColor}`}>

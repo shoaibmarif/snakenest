@@ -18,7 +18,7 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({ gameState, settings }) =
   const labelColor = isDark ? 'text-slate-400' : 'text-slate-500';
 
   return (
-    <div className="w-full max-w-[440px] sm:max-w-[480px] mx-auto space-y-3">
+    <div className="w-full max-w-[440px] sm:max-w-[480px] lg:max-w-none mx-auto space-y-3">
       {/* Top Floating HUD Cards */}
       <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5">
         {/* Score Card */}

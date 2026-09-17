@@ -28,7 +28,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({
   const subTextColor = isDark ? 'text-slate-400' : 'text-slate-600';
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-8 animate-in fade-in duration-200">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 animate-in fade-in duration-200">
       {/* Back Button */}
       <button
         onClick={onNavigateHome}

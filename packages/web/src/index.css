@@ -55,6 +55,38 @@ html:not(.dark) {
 }
 
 /* =========================================================================
+   UNIVERSAL INTERACTIVE CURSOR UTILITIES
+   Ensures all buttons, clickable roles, links, interactive inputs, and controls
+   consistently display a pointer cursor across the application.
+   ========================================================================= */
+
+button,
+[role="button"],
+a,
+select,
+summary,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+label[for],
+.cursor-pointer,
+[tabindex="0"]:not([tabindex="-1"]):not(body):not(input):not(textarea) {
+  cursor: pointer;
+}
+
+button:disabled,
+button[disabled],
+[role="button"][aria-disabled="true"],
+input:disabled,
+select:disabled,
+.disabled {
+  cursor: not-allowed;
+}
+
+/* =========================================================================
    CYBER-ARCADE GLASS & GLOW UTILITIES
    ========================================================================= */
 

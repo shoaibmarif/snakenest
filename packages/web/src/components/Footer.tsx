@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ theme = 'dark', onNavigateHome, 
     <footer className={`w-full border-t py-8 sm:py-10 mt-12 transition-colors duration-200 ${
       isDark ? 'border-white/10 bg-[#090e17]/60 text-slate-400' : 'border-slate-200 bg-white text-slate-600 shadow-sm'
     }`}>
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         {/* Left: App Logo, Title & Tagline */}
         <div className="space-y-1.5 max-w-md">
           <div

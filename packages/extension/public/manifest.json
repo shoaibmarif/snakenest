@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Project Companion Extension",
+  "name": "SnakeNest – Classic Retro Snake Game",
   "version": "0.1.0",
-  "description": "Chrome Extension with React 19 and shared @project/core engine",
+  "description": "Play the classic Snake Game directly in your browser popup. 4 battle modes, difficulty levels, local high scores, retro sound effects, and offline play.",
+  "homepage_url": "https://snakenest.netlify.app/",
   "permissions": [
     "storage",
     "contextMenus",

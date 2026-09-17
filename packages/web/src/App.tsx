@@ -133,7 +133,7 @@ export const App: React.FC = () => {
 
       {/* 1. Privacy Policy Page Route */}
       {isPrivacyRoute && (
-        <main className="flex-1 w-full max-w-7xl mx-auto">
+        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <PrivacyPolicy
             theme={settings.theme}
             onNavigateHome={() => navigateTo('/')}
@@ -143,7 +143,7 @@ export const App: React.FC = () => {
 
       {/* 2. 404 Page Not Found Route */}
       {isNotFound && (
-        <main className="flex-1 w-full max-w-7xl mx-auto flex items-center justify-center">
+        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
           <NotFoundPage
             theme={settings.theme}
             onNavigateHome={() => navigateTo('/')}
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
 
       {/* 3. Main Game Workbench Area (Home Route) */}
       {isHomeRoute && (
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
+        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12">
           {/* SEO Main Heading with Generous Breathing Spacing */}
           <div className="text-center space-y-2 pt-2 sm:pt-4">
             <h1 className={`text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight transition-colors ${
@@ -169,14 +169,14 @@ export const App: React.FC = () => {
           </div>
 
           {/* Unified Game Stage: Side-by-Side on Desktop (Arena + Controls/Selectors), Single-Column on Mobile */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start justify-center">
-            {/* Left / Center Column: Game Board Arena & Score HUD */}
-            <section className="relative flex flex-col items-center gap-5 sm:gap-6 w-full max-w-full lg:col-span-7 xl:col-span-7">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+            {/* Left Column: Game Board Arena & Score HUD */}
+            <section className="relative flex flex-col items-center gap-5 sm:gap-6 w-full max-w-full">
               {/* Score Board */}
               <ScoreBoard gameState={gameState} settings={settings} />
 
               {/* Interactive Game Board with Overlay */}
-              <div className="relative w-full max-w-[min(100%,460px)] lg:max-w-[480px]">
+              <div className="relative w-full max-w-[min(100%,460px)] lg:max-w-none">
                 <div className="arcade-ambient-glow" />
                 <GameBoard
                   gameState={gameState}
@@ -209,7 +209,7 @@ export const App: React.FC = () => {
             </section>
 
             {/* Right Column: Mode Selector, Difficulty Selector & Quick Stats - visible in the same screen on desktop */}
-            <aside className="w-full lg:col-span-5 xl:col-span-5 space-y-6 sm:space-y-7">
+            <aside className="w-full space-y-6 sm:space-y-7">
               {/* Mode and Difficulty Selectors */}
               <section id="mode-selector-section" className="space-y-5">
                 <GameModeSelector

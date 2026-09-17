@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
         ? 'border-white/10 bg-[#090e17]/80 shadow-[0_4px_20px_rgba(0,0,0,0.4)]'
         : 'border-slate-200/90 bg-white/85 shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
     }`}>
-      <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 sm:h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Branding & Logo with Favicon Vector Snake */}
         <div
           onClick={onNavigateHome}
