@@ -111,10 +111,19 @@ export const Workbench: React.FC = () => {
           <p className="text-xs text-slate-400 mb-4 leading-relaxed">
             Dual-target Rollup bundling both popup.html and background.js service worker with unhashed root filenames.
           </p>
-          <div className="rounded-lg bg-slate-950/80 p-3 text-xs font-mono text-slate-300 border border-slate-800/80">
+          <div className="rounded-lg bg-slate-950/80 p-3 text-xs font-mono text-slate-300 border border-slate-800/80 mb-3">
             <div className="text-slate-500 mb-1">// vite.config.ts</div>
             <div className="text-amber-400">dist/background.js & dist/popup.html</div>
           </div>
+          <a
+            href="https://chromewebstore.google.com/detail/snakenest-%E2%80%93-classic-retro/kccmemenobofeaoedlojngldeehjbjgg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-3 py-1.5 text-xs font-semibold transition-colors"
+          >
+            <Chrome className="h-3.5 w-3.5" />
+            <span>Install on Chrome Web Store</span>
+          </a>
         </div>
       </section>
 

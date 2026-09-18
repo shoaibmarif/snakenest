@@ -30,6 +30,10 @@ const FAQS: FaqItem[] = [
   {
     question: 'Can I play this Snake Game completely offline?',
     answer: 'Yes. Once loaded, the game relies entirely on client-side HTML5 Canvas and native Web Audio API synthesis without external API dependencies, allowing full offline play.'
+  },
+  {
+    question: 'Is there a Chrome Extension available for SnakeNest?',
+    answer: 'Yes! You can install the official SnakeNest Chrome Extension directly from the Chrome Web Store (https://chromewebstore.google.com/detail/snakenest-%E2%80%93-classic-retro/kccmemenobofeaoedlojngldeehjbjgg) to play classic Snake directly in a clean browser popup anytime with zero ads and 100% offline support.'
   }
 ];
 

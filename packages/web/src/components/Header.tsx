@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Moon, Sun, Settings } from 'lucide-react';
+import { Volume2, VolumeX, Moon, Sun, Settings, Chrome } from 'lucide-react';
 import type { GameSettings } from '@project/core';
 
 interface HeaderProps {
@@ -87,8 +87,24 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Action Controls: Sound, Theme, Settings */}
+        {/* Action Controls: Chrome Extension, Sound, Theme, Settings */}
         <div className="flex items-center gap-2">
+          {/* Chrome Extension Button */}
+          <a
+            href="https://chromewebstore.google.com/detail/snakenest-%E2%80%93-classic-retro/kccmemenobofeaoedlojngldeehjbjgg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 sm:px-3 py-1.5 text-xs font-semibold transition-all active:scale-95 cursor-pointer ${
+              isDark
+                ? 'border-emerald-500/30 bg-emerald-950/40 text-emerald-400 hover:border-emerald-500/60 hover:bg-emerald-900/50 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]'
+                : 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100 shadow-sm'
+            }`}
+            title="Install SnakeNest Chrome Extension"
+          >
+            <Chrome className="h-4 w-4 text-emerald-500 shrink-0" />
+            <span className="hidden sm:inline">Chrome Extension</span>
+          </a>
+
           {/* Sound Toggle */}
           <button
             onClick={onToggleSound}

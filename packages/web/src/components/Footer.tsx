@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Puzzle } from 'lucide-react';
+import { Github, Linkedin, Chrome } from 'lucide-react';
 
 interface FooterProps {
   theme?: 'dark' | 'light';
@@ -131,17 +131,16 @@ export const Footer: React.FC<FooterProps> = ({ theme = 'dark', onNavigateHome, 
               <span>LinkedIn</span>
             </a>
 
-            {/* Extension Pill */}
+            {/* Chrome Extension Pill */}
             <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('SnakeNest Chrome Extension is coming soon to the Chrome Web Store!');
-              }}
+              href="https://chromewebstore.google.com/detail/snakenest-%E2%80%93-classic-retro/kccmemenobofeaoedlojngldeehjbjgg"
+              target="_blank"
+              rel="noopener noreferrer"
               className={extensionPillClass}
+              title="Get SnakeNest on Chrome Web Store"
             >
-              <Puzzle className="h-3.5 w-3.5 text-indigo-500" />
-              <span>Extension</span>
+              <Chrome className="h-3.5 w-3.5 text-indigo-500" />
+              <span>Chrome Extension</span>
             </a>
           </div>
         </div>

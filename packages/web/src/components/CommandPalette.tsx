@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Search, Terminal, Zap, Puzzle, Globe, X } from 'lucide-react';
+import { Search, Terminal, Zap, Puzzle, Globe, X, Chrome } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -64,6 +64,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       icon: Globe,
       action: () => {
         alert('Run command: npm run build:web');
+        onClose();
+      }
+    },
+    {
+      id: 'ext-store',
+      title: 'Install SnakeNest on Chrome Web Store',
+      category: 'Chrome Extension',
+      icon: Chrome,
+      action: () => {
+        window.open(
+          'https://chromewebstore.google.com/detail/snakenest-%E2%80%93-classic-retro/kccmemenobofeaoedlojngldeehjbjgg',
+          '_blank',
+          'noopener,noreferrer'
+        );
         onClose();
       }
     },
